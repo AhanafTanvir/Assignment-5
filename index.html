@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Issues Tracker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="bg-gray-100 text-gray-800 font-sans h-screen overflow-hidden">
+
+    <div id="login-view" class="flex flex-col items-center justify-center h-full">
+        <div class="bg-white p-8 rounded-lg shadow-md w-96">
+            <div class="flex flex-col items-center mb-6">
+                <svg class="w-12 h-12 mb-2" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path fill-rule="evenodd"
+                        d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                        clip-rule="evenodd"></path>
+                </svg>
+                <h1 class="text-2xl font-bold">GitHub Issues Tracker</h1>
+                <p class="text-sm text-gray-500">Sign in to your account</p>
+            </div>
+
+            <form id="login-form" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Username</label>
+                    <input type="text" id="username"
+                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                        value="admin">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Password</label>
+                    <input type="password" id="password"
+                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                        value="admin123">
+                </div>
+                <button type="submit"
+                    class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none">
+                    Sign in
+                </button>
+            </form>
+            <div class="mt-4 p-3 bg-blue-50 rounded text-sm text-blue-800 text-center">
+                <strong>Demo Credentials:</strong><br>
+                Username: <code>admin</code><br>
+                Password: <code>admin123</code>
+            </div>
+            <p id="login-error" class="hidden mt-2 text-sm text-red-600 text-center font-semibold">Invalid credentials!
+                Please use 'admin' and 'admin123'</p>
+        </div>
+    </div>
+
+    <div id="dashboard-view" class="hidden flex-col h-full bg-slate-100">
+        <nav class="bg-indigo-900 text-white p-4 flex justify-between items-center shadow-md shrink-0">
+            <div class="flex items-center space-x-2">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path fill-rule="evenodd"
+                        d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                        clip-rule="evenodd"></path>
+                </svg>
+                <span class="font-semibold text-lg hidden sm:block">GitHub Issues Tracker</span>
+            </div>
+            <div class="flex items-center space-x-3">
+                <div class="relative text-gray-600">
+                    <span class="absolute inset-y-0 left-0 flex items-center pl-2">
+                        <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="2" viewBox="0 0 24 24" class="w-4 h-4 text-gray-400">
+                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                    </span>
+                    <input type="text" id="search-input" placeholder="Search issues..."
+                        class="py-1.5 pl-8 pr-3 w-40 sm:w-64 rounded-md text-sm text-gray-900 bg-white border border-transparent focus:outline-none focus:ring-2 focus:ring-indigo-400">
+                </div>
+                <button id="new-issue-btn"
+                    class="bg-green-600 hover:bg-green-700 text-white text-sm font-medium py-1.5 px-3 rounded-md flex items-center transition whitespace-nowrap">
+                    <span class="mr-1 text-lg leading-none">+</span> <span class="hidden sm:inline">New Issue</span>
+                </button>
+                <button id="logout-btn" class="text-sm text-indigo-200 hover:text-white transition ml-2">Logout</button>
+            </div>
+        </nav>
+
+        <main class="flex-1 overflow-y-auto p-4 sm:p-6 max-w-7xl mx-auto w-full">
+            <div class="bg-white rounded-lg shadow-sm p-4 mb-6">
+                <div class="flex space-x-2 border-b pb-4 mb-4" id="tabs-container">
+                    <button class="tab-btn active-tab px-4 py-2 rounded-md font-medium text-sm transition"
+                        data-filter="All">All</button>
+                    <button
+                        class="tab-btn text-gray-500 hover:bg-gray-100 px-4 py-2 rounded-md font-medium text-sm transition"
+                        data-filter="Open">Open</button>
+                    <button
+                        class="tab-btn text-gray-500 hover:bg-gray-100 px-4 py-2 rounded-md font-medium text-sm transition"
+                        data-filter="Closed">Closed</button>
+                </div>
+
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 py-2">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-14 h-14 rounded-full bg-[#ECE4FF] flex justify-center items-center shrink-0">
+                            <img src="images/ring.png" alt="Issues Ring" class="w-8 h-8 object-contain">
+                        </div>
+                        <div class="flex flex-col">
+                            <span class="text-3xl font-extrabold text-slate-800 leading-tight" id="issue-count">0
+                                Issues</span>
+                            <span class="text-slate-500 text-sm font-medium">Track and manage your project issues</span>
+                        </div>
+                    </div>
+
+                    <div class="flex space-x-4 font-medium text-gray-600 mt-2 sm:mt-0">
+                        <span class="flex items-center"><span class="w-3 h-3 rounded-full bg-green-500 mr-2"></span>
+                            Open</span>
+                        <span class="flex items-center"><span class="w-3 h-3 rounded-full bg-purple-500 mr-2"></span>
+                            Closed</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="loader" class="hidden justify-center py-10">
+                <div class="spinner border-4 border-indigo-200 border-t-indigo-600 rounded-full w-12 h-12 animate-spin">
+                </div>
+            </div>
+
+            <div id="issues-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pb-10">
+            </div>
+        </main>
+    </div>
+
+    <div id="issue-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-2xl overflow-hidden flex flex-col max-h-[90vh]">
+            <div id="modal-loader" class="hidden justify-center p-10">
+                <div class="spinner border-4 border-indigo-200 border-t-indigo-600 rounded-full w-10 h-10 animate-spin">
+                </div>
+            </div>
+            <div id="modal-content" class="p-6 overflow-y-auto"></div>
+            <div class="p-4 border-t bg-gray-50 flex justify-end">
+                <button id="close-modal"
+                    class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
