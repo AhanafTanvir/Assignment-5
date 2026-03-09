@@ -1,10 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // --- Constants & State ---
     const API_BASE = "https://phi-lab-server.vercel.app/api/v1/lab";
     let currentIssues = [];
     let currentFilter = 'All';
 
-    // --- DOM Elements ---
     const loginView = document.getElementById('login-view');
     const dashboardView = document.getElementById('dashboard-view');
     const loginForm = document.getElementById('login-form');
@@ -22,7 +20,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const modalLoader = document.getElementById('modal-loader');
     const closeModalBtn = document.getElementById('close-modal');
 
-    // --- Authentication ---
     loginForm.addEventListener('submit', (e) => {
         e.preventDefault();
         const user = document.getElementById('username').value.trim();
@@ -43,10 +40,9 @@ document.addEventListener("DOMContentLoaded", () => {
         dashboardView.classList.add('hidden');
         dashboardView.classList.remove('flex');
         loginView.classList.remove('hidden');
-        document.getElementById('password').value = ''; // clear password for security
+        document.getElementById('password').value = '';
     });
 
-    // --- Tabs & Search ---
     tabs.forEach(tab => {
         tab.addEventListener('click', (e) => {
             tabs.forEach(t => {
@@ -75,7 +71,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     closeModalBtn.addEventListener('click', () => modal.classList.add('hidden'));
 
-    // --- Data Fetching ---
     async function fetchIssues() {
         showLoader(true);
         try {
@@ -111,7 +106,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // --- Helper Function for Custom Labels & Images ---
     function createLabelsHtml(labelsArray, limit = null) {
         let labels = labelsArray || [];
         if (limit) labels = labels.slice(0, limit);
@@ -136,7 +130,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }).join('');
     }
 
-    // --- Render Logic ---
     function renderIssues() {
         issuesGrid.innerHTML = '';
         let filteredIssues = currentIssues;
@@ -158,10 +151,8 @@ document.addEventListener("DOMContentLoaded", () => {
             const isOpen = issue.status && issue.status.toLowerCase() === 'open';
             const statusClass = isOpen ? 'card-open' : 'card-closed';
 
-            // Assuming Vector.png is used for both open/closed based on design, otherwise change the false condition path
             const statusIconPath = isOpen ? 'images/Vector.png' : 'images/Vector.png';
 
-            // Set Priority styles
             const priorityText = (issue.priority || 'Normal').toUpperCase();
             let priorityBg = 'bg-gray-100 text-gray-800';
             if (priorityText === 'HIGH') priorityBg = 'bg-red-100 text-red-600 border-red-200';
@@ -199,7 +190,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // --- Modal Logic ---
     async function openIssueModal(id) {
         if (!id) return;
         modal.classList.remove('hidden');
